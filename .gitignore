@@ -2,3 +2,7 @@
 Logs
 UserSettings
 Temp
+.vs
+obj
+Assembly-CSharp.csproj
+_test-git-.sln
