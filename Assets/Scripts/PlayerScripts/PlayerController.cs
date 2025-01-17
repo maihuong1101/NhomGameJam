@@ -65,4 +65,17 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireCube(groundCheckPoint.position + new Vector3(-0.05f, 0, 0) + 
             Vector3.down * groundCheckDistance / 2, new Vector3(boxSize.x, boxSize.y, 1));
     }
+    private void Flip()
+    {
+        if (horizontalInput > 0)
+        {
+            transform.localScale = new Vector2(1, transform.localScale.y);
+            lookingRight = true;
+        }
+        else if (horizontalInput < 0)
+        {
+            transform.localScale = new Vector2(-1, transform.localScale.y);
+            lookingRight = false;
+        }
+    }
 }
