@@ -11,6 +11,7 @@ public class Bubble : MonoBehaviour
     public static Bubble instance;
     public GameObject target; 
     private DistanceJoint2D joint;
+    public GameObject anim;
     private void Awake()
     {
         instance = this;
@@ -31,8 +32,9 @@ public class Bubble : MonoBehaviour
     }
     private IEnumerator BoomBoom(bool isdontstick, string tag)
     {
-
-        if(isdontstick)
+        sr.enabled = false;
+        anim.SetActive(true);
+        if (isdontstick)
         {
             Player.instance.CancelThrow();
             yield return new WaitForSeconds(0.2f);
