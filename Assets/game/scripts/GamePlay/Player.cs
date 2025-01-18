@@ -7,7 +7,7 @@ using DG.Tweening;
 public class Player : Character
 {
     public static Player instance;
-    [SerializeField] private Rigidbody2D rb;
+    public Rigidbody2D rb;
     //    [SerializeField] private Animator anim;
     [SerializeField] private LayerMask groundedLayer;
     [SerializeField] private int Speed = 5;
@@ -96,9 +96,13 @@ public class Player : Character
             {
                 OutSpin();
             }
-            if (Input.GetKeyDown(KeyCode.V) )
+            if (Input.GetKey(KeyCode.V) )
             {
                 Pull();
+            }
+            if (Input.GetKeyUp(KeyCode.V))
+            {
+                UnPull();
             }
         }
         else
@@ -167,13 +171,11 @@ public class Player : Character
     public void SetSpin()
     {
         CancelThrow();
-        Debug.Log("setSpin");
         tweenValue = minAngle;
         rotationTween = DOTween.To(() => tweenValue, x => tweenValue = x, maxAngle, 1f) // Tween đến giá trị B trong 1 giây
         .SetLoops(-1, LoopType.Yoyo) // Lặp vô hạn và quay về giá trị A
         .OnUpdate(() =>
         {
-            Debug.Log($"Current Value: {tweenValue}");
             rope.transform.localRotation = Quaternion.Euler(0, 0, tweenValue);
         })
         .SetEase(Ease.InOutSine);
@@ -246,9 +248,24 @@ public class Player : Character
         rbBubble.velocity = Vector2.zero;
         bubble.SetActive(false);
     }
+
     public void Pull()
     {
-        changeanim("pull");
+        if(Bubble.instance== null || Bubble.instance.allowPull != true)
+        {
+            return;
+        }
+        Bubble.instance.Pull();
+        changeanim("pull"); 
+    }
+    public void UnPull()
+    {
+        if (Bubble.instance == null)
+        {
+            return;
+        }
+        CancelThrow();
+        Bubble.instance.Destroypull();
         Invoke(nameof(ResetAttack), 0.5f);
     }
     public void jump()
