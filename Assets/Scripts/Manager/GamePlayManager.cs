@@ -43,7 +43,7 @@ public class GamePlayManager : MonoBehaviour
             }
         }
     }
-    public void RespawnPlayer(GameObject player)
+    private void RespawnPlayer(GameObject player)
     {
         if (!PlayerController.Instance.isAlive)
         {
