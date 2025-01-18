@@ -19,6 +19,22 @@ public class Bubble : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             rb.bodyType = RigidbodyType2D.Kinematic;
+            StartCoroutine(BoomBoom(collision.CompareTag("dontStick") || collision.CompareTag("DeathZone") ? true : false));
+
+        }
+    }
+    private IEnumerator BoomBoom(bool isdontstick)
+    {
+
+        if(isdontstick)
+        {
+            Player.instance.CancelThrow();
+            yield return new WaitForSeconds(0.2f);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Player.instance.SetStiky();
         }
     }
 }
