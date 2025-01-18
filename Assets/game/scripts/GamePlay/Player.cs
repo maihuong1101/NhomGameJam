@@ -46,6 +46,7 @@ public class Player : Character
 
     private void Awake()
     {
+        savePoint = transform.position;
         instance = this;
     }
     private void Start()
