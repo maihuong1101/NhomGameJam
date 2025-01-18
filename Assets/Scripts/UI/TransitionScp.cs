@@ -11,15 +11,14 @@ public class TransitionScp : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            transisionAnim.SetBool("transit", true);
-            
-            Player.instance.transform.position = nextPos.position;
-            Invoke("BackToNormal", 2f);
+            transisionAnim.SetTrigger("End");
+            Invoke("BackToNormal", 1f);
         }
     }
     void BackToNormal()
     {
-        transisionAnim.SetBool("transit", false);
+        transisionAnim.SetTrigger("Start");
+        Player.instance.transform.position = nextPos.position;
     }
     IEnumerator DeadTime()
     {

@@ -13,7 +13,7 @@ public class Cockroach : Enemy
     [SerializeField] private Transform leftBoundary; // Diem gioi han trai
     [SerializeField] private Transform rightBoundary; // Diem gioi han phai
 
-    private bool movingRight = true; // Huong di chuyen ban dau
+    [SerializeField]private bool movingRight = true; // Huong di chuyen ban dau
     private Vector3 localScale;
     // Start is called before the first frame update
     protected override void Start()
