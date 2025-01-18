@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2980872351108661085}
   - component: {fileID: 8177332123366970751}
   - component: {fileID: 3541221991573031956}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: kitchen_trampoline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
