@@ -670,7 +670,7 @@ MonoBehaviour:
   groundCheckPoint: {fileID: 1798286704}
   groundCheckLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   waterCheckLayer:
     serializedVersion: 2
     m_Bits: 0
