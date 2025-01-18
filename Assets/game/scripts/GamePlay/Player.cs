@@ -121,7 +121,7 @@ public class Player : Character
             rb.velocity = new Vector2(horizontal * Speed, rb.velocity.y);
             transform.rotation = Quaternion.Euler(new Vector3(0, horizontal > 0 ? 0 : 180, 0));
         }
-        else if (isGrounded)
+        else if (isGrounded&& !isJumping)
         {
             changeanim("idle");
             rb.velocity = Vector2.zero;
@@ -247,7 +247,7 @@ public class Player : Character
     }
     public void Pull()
     {
-        changeanim("throw");
+        changeanim("pull");
         Invoke(nameof(ResetAttack), 0.5f);
     }
     public void jump()
