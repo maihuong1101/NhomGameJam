@@ -23,6 +23,13 @@ public class Player : Character
     private Tween rotationTween;
     private bool isSwing = false;
 
+    [SerializeField] private Transform groundCheckPoint;
+    [SerializeField] private LayerMask groundCheckLayer;
+    [SerializeField] private LayerMask waterCheckLayer;
+    [SerializeField] private Vector2 boxSize;
+    [SerializeField] private float groundCheckDistance;
+    public float groundCheckRadius = 0.4f;
+
     private GameObject bubble;
     private bool isThrowing = false;
     private bool isSticky = false;
@@ -149,22 +156,44 @@ public class Player : Character
     {
         base.OnDeath();
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Gizmos.DrawWireCube(groundCheckPoint.position + new Vector3(0f, 0f, 0f) +
+        //    Vector3.down * groundCheckDistance / 2, new Vector3(boxSize.x, boxSize.y, 1));
+        Gizmos.DrawWireSphere(groundCheckPoint.position, groundCheckRadius);
+
+    }
     private bool CheckGrounded()
     {
-        Debug.DrawLine(transform.position, transform.position + Vector3.down * 1.1f, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position-Vector3.left*0.01f, Vector2.down, 1.1f, groundedLayer);
-        if (hit.collider != null)
+        //Debug.DrawLine(transform.position, transform.position + Vector3.down * 1.1f, Color.red);
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position-Vector3.left*0.01f, Vector2.down, 1.1f, groundedLayer);
+        //if (hit.collider != null)
+        //{
+        //    return true;
+        //}
+        //else
+        //{
+        //    return false;
+        //}
+
+        //if (Physics2D.BoxCast(groundCheckPoint.position, boxSize, 0, Vector2.down, groundCheckDistance, groundCheckLayer))
+        //{
+        //    Debug.Log("1");
+        //    return true;
+        //}
+        //else return false;
+        if(Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundCheckLayer))
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+        else return false;
+
     }
     /// <summary>
     ///  spin
     /// </summary>
+
 
     float currentDestination;
     float i = 0;
@@ -321,9 +350,16 @@ public class Player : Character
             Invoke(nameof(OnInit), 0.3f);
         }
     }
-
     public void SetStiky()
     {
         isSticky = true;
+    }
+    public bool IsOnGround()
+    {
+        if (Physics2D.BoxCast(groundCheckPoint.position, boxSize, 0, Vector2.down, groundCheckDistance, groundCheckLayer))
+        {
+            return true;
+        }
+        else return false;
     }
 }

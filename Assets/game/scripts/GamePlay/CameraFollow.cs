@@ -9,8 +9,14 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform target;
     public Vector3 offset;
     public float speed;
+    public float yorigin;
+    private void Awake()
+    {
+        yorigin = transform.position.y;
+    }
     private void LateUpdate()
     {
-        transform.position = target.transform.position+ offset;
+        Vector3 newpos = target.transform.position + offset;
+        transform.position = new Vector3(newpos.x, yorigin,-10 );
     }
 }

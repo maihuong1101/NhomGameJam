@@ -25,31 +25,31 @@ public class GamePlayManager : MonoBehaviour
             else
                 UIManager.Instance.GameResume();
         }
-        SaveLastPos();
-        RespawnPlayer(Player);
+        //SaveLastPos();
+        //RespawnPlayer(Player);
     }
-    private void SaveLastPos()
-    {
-        if (PlayerController.Instance.isGrounded)
-        {
-            timer += Time.deltaTime;
-            if (timer > 2)
-            {
-                lastPost = PlayerController.Instance.transform;
+    //private void SaveLastPos()
+    //{
+    //    if (PlayerController.Instance.isGrounded)
+    //    {
+    //        timer += Time.deltaTime;
+    //        if (timer > 2)
+    //        {
+    //            lastPost = PlayerController.Instance.transform;
 
-                Debug.Log(lastPost.position);
+    //            Debug.Log(lastPost.position);
 
-                timer = 0;
-            }
-        }
-    }
-    private void RespawnPlayer(GameObject player)
-    {
-        if (!PlayerController.Instance.isAlive)
-        {
-            player.transform.position = lastPost.position;
-            player.transform.rotation = lastPost.rotation;
-        }
-    }
+    //            timer = 0;
+    //        }
+    //    }
+    //}
+    //private void RespawnPlayer(GameObject player)
+    //{
+    //    if (!PlayerController.Instance.isAlive)
+    //    {
+    //        player.transform.position = lastPost.position;
+    //        player.transform.rotation = lastPost.rotation;
+    //    }
+    //}
 
 }

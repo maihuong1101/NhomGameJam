@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5093568508132490760}
   - component: {fileID: 1956093534868440794}
   - component: {fileID: 8989097503340636972}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hafl bows
   m_TagString: Untagged
   m_Icon: {fileID: 0}

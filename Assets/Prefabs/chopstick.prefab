@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8861149347670541219}
   - component: {fileID: 3226654821740362308}
   - component: {fileID: 5614704243202307719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: chopstick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
