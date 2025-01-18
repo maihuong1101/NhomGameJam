@@ -45,26 +45,17 @@ public class Bubble : MonoBehaviour
             if (tag == "allowpull")
             {
                 allowPull = true;
-                if (joint == null)
-                    joint = target.AddComponent<DistanceJoint2D>();
-                else
-                {
-                    joint.enabled = true;
-                }
-
-                joint.connectedBody = Player.instance.rb;
-                joint.autoConfigureDistance = false;
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                transform.parent = target.transform;
             }
         }
     }
     public void Pull()
     {
-        joint.enabled = true;
-        joint.distance -= 0.01f;
-        joint.enabled = false;
+        target.transform.position = Vector2.MoveTowards(target.transform.position, Player.instance.transform.position, 0.01f);
     }
     public void Destroypull()
     {
-        joint.enabled = false;
+        Destroy(gameObject);
     }
 }
