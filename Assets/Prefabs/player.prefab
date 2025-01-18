@@ -334,7 +334,7 @@ MonoBehaviour:
   Speed: 6
   jumpForce: 700
   throwForce: 12
-  throwpoint: {fileID: 5173773683106831340}
+  throwpoint: {fileID: 3262401321886087932}
   rope: {fileID: 3672702668353526749}
   locXoay: {fileID: 6085169883029088861}
   bubblePrefab: {fileID: 5206730379851891422, guid: 26ab842901856ef4fb7e282c671fadfa, type: 3}
@@ -1333,9 +1333,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2458108373731561655}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 19f9e6076e8967c4598c8fa0494eb8b3, type: 3}
---- !u!4 &5173773683106831340 stripped
+--- !u!4 &3262401321886087932 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1782283756261952763, guid: 19f9e6076e8967c4598c8fa0494eb8b3, type: 3}
+  m_CorrespondingSourceObject: {fileID: -994874588223410709, guid: 19f9e6076e8967c4598c8fa0494eb8b3, type: 3}
   m_PrefabInstance: {fileID: 6879000365932058391}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5213136926193512137 stripped
