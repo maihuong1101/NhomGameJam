@@ -60,7 +60,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\DesignPattern\Observer.cs" />
     <Compile Include="Assets\Scripts\DesignPattern\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Cockroach\Cockroach.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Manager\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GamePlayManager.cs" />
