@@ -6,6 +6,7 @@ using DG.Tweening;
 
 public class Player : Character
 {
+    
     public static Player instance;
     public Rigidbody2D rb;
     //    [SerializeField] private Animator anim;
@@ -15,12 +16,15 @@ public class Player : Character
     [SerializeField] private float throwForce = 20;
     [SerializeField] private Transform throwpoint;
     [SerializeField] private GameObject rope;
+    [SerializeField] private GameObject locXoay;
     [SerializeField] private GameObject bubblePrefab;
     [SerializeField] private GameObject bubbleOrigin;
     [SerializeField] private DistanceJoint2D jointDu;
+    [SerializeField] private forcebar forcebar;
     private bool isGrounded = true;
     private bool isJumping = false; 
     private Tween rotationTween;
+    private Tween fillTween;
     private bool isSwing = false;
 
     [SerializeField] private Transform groundCheckPoint;
@@ -28,6 +32,7 @@ public class Player : Character
     public float groundCheckRadius = 0.4f;
 
     private GameObject bubble;
+    private bool isSpin = false;
     private bool isThrowing = false;
     private bool isSticky = false;
     private float horizontal;
@@ -43,6 +48,7 @@ public class Player : Character
     public Vector3 rotationAxis = Vector3.forward; // Xoay quanh trục z
     private float currentAngle;
     private float tweenValue; // Giá trị sẽ tween
+    private float tweenValueFill; // Giá trị sẽ tween
 
     Action updateCheckPoint;
     float timer = 0;
@@ -122,17 +128,19 @@ public class Player : Character
         }
         if (!isGrounded && rb.velocity.y < 0)
         {
-            changeanim("fall");
             isJumping = false;
         }
         if (Mathf.Abs(horizontal) > 0.1f && !isSwing)
         {
             rb.velocity = new Vector2(horizontal * Speed, rb.velocity.y);
             transform.rotation = Quaternion.Euler(new Vector3(0, horizontal > 0 ? 0 : 180, 0));
+            anim.SetFloat("Blend", 1);
         }
-        else if (isGrounded&& !isJumping)
+        else if (isGrounded)
         {
-            changeanim("idle");
+            anim.SetFloat("Blend", 0);
+            if(!isThrowing&& !isJumping && ! isSpin)
+                changeanim("idle");
             rb.velocity = Vector2.zero;
         }
         updateCheckPoint.Invoke();
@@ -143,6 +151,7 @@ public class Player : Character
         rb.velocity = Vector2.zero;
         IsDead = false;
         changeanim("idle");
+        CancelThrow();
         SavePoint();
     }
     public override void OnDespawn()
@@ -183,15 +192,31 @@ public class Player : Character
         .SetLoops(-1, LoopType.Yoyo) // Lặp vô hạn và quay về giá trị A
         .OnUpdate(() =>
         {
+            ChangeAnim("spin");
             rope.transform.localRotation = Quaternion.Euler(0, 0, tweenValue);
         })
         .SetEase(Ease.InOutSine);
+        locXoay.SetActive(true);
+        tweenValueFill = 1; 
+        fillTween = DOTween.To(() => tweenValueFill, x => tweenValueFill = x, 0, 1f) // Tween đến giá trị B trong 1 giây
+            .SetLoops(-1, LoopType.Yoyo) // Lặp vô hạn và quay về giá trị A
+            .OnUpdate(() =>
+            {
+                forcebar.SetForce(tweenValueFill);
+            })
+            .SetEase(Ease.InOutSine);
+        forcebar.gameObject.SetActive(true);
+        isSpin = true;
     }
     public void OutSpin()
     {
-        changeanim("spin");
+        forcebar.gameObject.SetActive(false);
+        changeanim("throw");
         if (rotationTween != null) rotationTween.Kill();
+        if (fillTween != null) fillTween.Kill();
         Throw();
+        locXoay.SetActive(false);
+        isSpin = false;
     }
     /// <summary>
     /// EndSpin 
@@ -232,7 +257,6 @@ public class Player : Character
         }
         bubble.transform.position = bubbleOrigin.transform.position;
         isThrowing = true;
-        bubble.SetActive(true);
         Rigidbody2D rbBubble = bubble.GetComponent<Rigidbody2D>();
         rbBubble.bodyType = RigidbodyType2D.Dynamic;
         rbBubble.AddForce(rope.transform.up*throwForce, ForceMode2D.Impulse);
@@ -240,6 +264,7 @@ public class Player : Character
         Rope.instance.TurnOnLine();
         changeanim("throw");
     }
+    
     public void CancelThrow()
     {
         isSticky = false;
@@ -253,7 +278,7 @@ public class Player : Character
         Rigidbody2D rbBubble = bubble.GetComponent<Rigidbody2D>();
         rbBubble.bodyType = RigidbodyType2D.Kinematic;
         rbBubble.velocity = Vector2.zero;
-        bubble.SetActive(false);
+        Destroy(bubble);
     }
 
     public void Pull()
