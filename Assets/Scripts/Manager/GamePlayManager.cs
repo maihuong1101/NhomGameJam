@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class GamePlayManager : MonoBehaviour
 {
-    [SerializeField] private GameObject Player;
-    private Transform lastPost;
-    private float timer;
     private void Awake()
     {
         Time.timeScale = 1.0f;
-        timer = 0f;
     }
+    // Start is called before the first frame update
     void Start()
     {
-
+        
     }
+
+    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
