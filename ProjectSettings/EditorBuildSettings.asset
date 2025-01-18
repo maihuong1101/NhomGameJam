@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Thinh_TestUI.unity
     guid: f4cd4793808d93748906f08df145b772
   - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+    guid: ab9a41f591b13454c883ef44f3d87fb7
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 37672c073220ea84296e3d7daefac11e
   m_configObjects: {}

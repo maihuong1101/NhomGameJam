@@ -42,8 +42,7 @@ public class PlayerController : MonoBehaviour
         {
             Instance = this;
         }
-        isAlive = true;
-        lookingRight = true;
+        //DontDestroyOnLoad(gameObject);
     }
     void Start()
     {
@@ -124,11 +123,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        //if (Input.GetKeyUp(KeyCode.Space) && playerRb.velocity.y > 0)
-        //{
-        //    playerAnimation.SetTrigger("Jump");
-        //    playerRb.velocity = new Vector2(playerRb.velocity.x, 0);
-        //}
+        if (Input.GetKeyUp(KeyCode.Space) && playerRb.velocity.y > 0)
+        {
+            //playerAnimation.SetTrigger("Jump");
+            playerRb.velocity = new Vector2(playerRb.velocity.x, 0);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && IsOnGround())
         {
@@ -137,19 +136,11 @@ public class PlayerController : MonoBehaviour
             //playerAnimation.SetTrigger("Jump");
             playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
         }
-        //else if (!IsOnGround() && airJumpCounter < maxAirJump && Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    airJumpCounter++;
-        //    playerAnimation.SetTrigger("Jump");
-        //    playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
-        //}
-    }
-    private void Water()
-    {
-        if (Physics2D.BoxCast(groundCheckPoint.position, boxSize, 0, 
-            Vector2.down, groundCheckDistance, waterCheckLayer))
+        else if (!IsOnGround() && airJumpCounter < maxAirJump && Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(Death());
+            airJumpCounter++;
+            //playerAnimation.SetTrigger("Jump");
+            playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
         }
     }
     IEnumerator Death()

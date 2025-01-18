@@ -1111,6 +1111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c390975842681a84da5120d4e0094383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
 --- !u!4 &565073481
 Transform:
   m_ObjectHideFlags: 0
@@ -1971,7 +1972,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME TITLE
+  m_text: Tiny's Return
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4a5ebacb1a1aec4a985ff02c1a89ce1, type: 2}
   m_sharedMaterial: {fileID: -8295528220698845427, guid: e4a5ebacb1a1aec4a985ff02c1a89ce1, type: 2}

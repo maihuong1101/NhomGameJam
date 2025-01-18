@@ -12,6 +12,8 @@ public class UIManager : Singleton<UIManager>
     public Slider musicSlider, sfxSlider;
 
     [SerializeField] private GameObject gamePauseMenu;
+
+
     private void Awake()
     {
         SetMusic(PlayerPrefs.GetFloat("Music"));
@@ -56,13 +58,13 @@ public class UIManager : Singleton<UIManager>
     {
         SoundManager.instance.ToggleSfx();
     }
-    public void SetMusic(float volume)
-    {
-        musicSlider.value = volume;
-    }
     public void MusicVolume()
     {
         SoundManager.instance.MusicVolume(musicSlider.value);
+    }
+    public void SetMusic(float volume)
+    {
+        musicSlider.value = volume; 
     }
     public void SetSfx(float volume)
     {
