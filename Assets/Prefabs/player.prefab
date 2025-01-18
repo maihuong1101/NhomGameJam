@@ -335,7 +335,7 @@ MonoBehaviour:
     m_Bits: 64
   Speed: 6
   jumpForce: 700
-  throwForce: 10
+  throwForce: 12
   throwpoint: {fileID: 3672702668669462521}
   rope: {fileID: 3672702668353526749}
   bubblePrefab: {fileID: 5206730379851891422, guid: 26ab842901856ef4fb7e282c671fadfa, type: 3}

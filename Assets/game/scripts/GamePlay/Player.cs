@@ -6,6 +6,7 @@ using DG.Tweening;
 
 public class Player : Character
 {
+    public static Player instance;
     [SerializeField] private Rigidbody2D rb;
     //    [SerializeField] private Animator anim;
     [SerializeField] private LayerMask groundedLayer;
@@ -24,9 +25,10 @@ public class Player : Character
 
     private GameObject bubble;
     private bool isThrowing = false;
+    private bool isSticky = false;
     private float horizontal;
     private int coin = 0;
-    private Vector3 savePoint;
+    private Vector3 savePoint= new Vector3 (- 5 ,0,0);
 
     public float minAngle = -60f; // Góc nhỏ nhất
     public float maxAngle = -15f; // Góc lớn nhất
@@ -42,6 +44,10 @@ public class Player : Character
     float timer = 0;
     float timeCDCheckPoint = 0;
 
+    private void Awake()
+    {
+        instance = this;
+    }
     private void Start()
     {
         OnInit();
@@ -58,6 +64,11 @@ public class Player : Character
 
         if (isGrounded)
         {
+            if (jointDu.enabled)
+            {
+                CancelThrow();
+            }
+            jointDu.enabled = false;
             if (isJumping)
             {
                 return;
@@ -69,6 +80,11 @@ public class Player : Character
             if (Mathf.Abs(horizontal) > 0.1f)
             {
                 changeanim("run");
+                anim.SetFloat("speed", 1);
+            }
+            else
+            {
+                anim.SetFloat("speed", 0);
             }
 
             if (Input.GetKeyDown(KeyCode.C) && isGrounded)
@@ -90,7 +106,7 @@ public class Player : Character
             {
                 UnSwing();
             }
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKey(KeyCode.X) && isSticky)
             {
                 SetSwing();
             }
@@ -110,10 +126,12 @@ public class Player : Character
             changeanim("idle");
             rb.velocity = Vector2.zero;
         }
+        updateCheckPoint.Invoke();
     }
     public void OnInit()
     {
         transform.position = savePoint;
+        rb.velocity = Vector2.zero;
         IsDead = false;
         changeanim("idle");
         SavePoint();
@@ -170,6 +188,10 @@ public class Player : Character
     /// </summary>
     public void SetSwing()
     {
+        if(isSwing)
+        {
+            return;
+        }
         isSwing = true;
         changeanim("Swing");
         jointDu.enabled = true;
@@ -181,6 +203,7 @@ public class Player : Character
         changeanim("Jumpout");
         jointDu.enabled = false;
         jointDu.connectedBody = null;
+        CancelThrow();
     }
     private void ResetAttack()
     {
@@ -209,6 +232,7 @@ public class Player : Character
     }
     public void CancelThrow()
     {
+        isSticky = false;
         Rope.instance.TurnOffLine();
         rope.transform.localRotation = Quaternion.Euler(0, 0, -15);
         isThrowing = false;
@@ -266,7 +290,22 @@ public class Player : Character
         if (collision.tag == "DeathZone")
         {
             changeanim("die");
-            Invoke(nameof(OnInit), 1f);
+            CancelThrow();
+            Invoke(nameof(OnInit), 0.3f);
         }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    { 
+        if(collision.gameObject.CompareTag("DeathZone"))
+        {
+            changeanim("die");
+            CancelThrow();
+            Invoke(nameof(OnInit), 0.3f);
+        }
+    }
+
+    public void SetStiky()
+    {
+        isSticky = true;
     }
 }
