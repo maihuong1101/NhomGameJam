@@ -42,7 +42,8 @@ public class PlayerController : MonoBehaviour
         {
             Instance = this;
         }
-        //DontDestroyOnLoad(gameObject);
+        isAlive = true;
+        lookingRight = true;
     }
     void Start()
     {
@@ -141,6 +142,14 @@ public class PlayerController : MonoBehaviour
             airJumpCounter++;
             //playerAnimation.SetTrigger("Jump");
             playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
+        }
+    }
+    private void Water()
+    {
+        if (Physics2D.BoxCast(groundCheckPoint.position, boxSize, 0, 
+            Vector2.down, groundCheckDistance, waterCheckLayer))
+        {
+            StartCoroutine(Death());
         }
     }
     IEnumerator Death()

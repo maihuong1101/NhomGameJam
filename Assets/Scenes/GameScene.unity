@@ -315,6 +315,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPause: 0
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
   gamePauseMenu: {fileID: 1823406709}
 --- !u!114 &61654195
 MonoBehaviour:
@@ -328,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c390975842681a84da5120d4e0094383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 1931099153}
 --- !u!1 &90768071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1261,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774582103}
   m_CullTransparentMesh: 1
+--- !u!1 &1795381665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1795381667}
+  - component: {fileID: 1795381666}
+  m_Layer: 0
+  m_Name: GamePlayManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1795381666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795381665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c390975842681a84da5120d4e0094383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1931099153}
+--- !u!4 &1795381667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795381665}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1798286703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,7 +1667,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1931099156
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1704,7 +1752,7 @@ MonoBehaviour:
   isJumping: 0
   isGrounded: 0
   lookingRight: 0
-  playerSpeed: 0
+  playerSpeed: 3
   groundCheckPoint: {fileID: 1798286704}
   groundCheckLayer:
     serializedVersion: 2
@@ -1714,7 +1762,7 @@ MonoBehaviour:
     m_Bits: 0
   boxSize: {x: 1, y: 0.1}
   groundCheckDistance: 0.1
-  jumpForce: 1
+  jumpForce: 5
   maxAirJump: 1
 --- !u!1 &1998106055
 GameObject:
@@ -2143,6 +2191,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 541973691}
     m_Modifications:
+    - target: {fileID: 448894430955091739, guid: 55f70cc92319cb9419d2106157fc6ed1, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5001594197980521884, guid: 55f70cc92319cb9419d2106157fc6ed1, type: 3}
       propertyPath: m_Name
       value: Enemy_1
@@ -2214,3 +2266,4 @@ SceneRoots:
   - {fileID: 541973691}
   - {fileID: 1078570387701862750}
   - {fileID: 90768074}
+  - {fileID: 1795381667}
