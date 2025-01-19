@@ -339,18 +339,18 @@ public class Player : Character
         //}
         if (collision.tag == "DeathZone")
         {
-            changeanim("die");
+            changeanim("dead");
             CancelThrow();
-            Invoke(nameof(OnInit), 0.3f);
+            Invoke(nameof(OnInit), 3f);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     { 
         if(collision.gameObject.CompareTag("DeathZone"))
         {
-            changeanim("die");
+            changeanim("dead");
             CancelThrow();
-            Invoke(nameof(OnInit), 0.3f);
+            Invoke(nameof(OnInit), 3f);
         }
     }
     public void SetStiky()
