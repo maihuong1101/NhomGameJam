@@ -73,11 +73,11 @@ public class Cockroach : Enemy
     {
         if (movingRight)
         {
-            localScale.x = Mathf.Abs(localScale.x);
+            localScale.x = -Mathf.Abs(localScale.x);
         }
         else
         {
-            localScale.x = -Mathf.Abs(localScale.x);
+            localScale.x = Mathf.Abs(localScale.x);
         }
         transform.localScale = localScale;
     }
