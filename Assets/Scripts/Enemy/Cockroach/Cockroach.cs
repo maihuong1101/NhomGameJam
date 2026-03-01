@@ -6,7 +6,6 @@ public class Cockroach : Enemy
 {
     [SerializeField] private Transform groundCheckPoint;
     [SerializeField] private LayerMask groundCheckLayer;
-    [SerializeField] private LayerMask waterCheckLayer;
     [SerializeField] private Vector2 boxSize;
     [SerializeField] private float groundCheckDistance;
 

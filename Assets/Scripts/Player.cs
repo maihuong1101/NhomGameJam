@@ -88,15 +88,15 @@ public class Player : Character
             {
                 jump();
             }
-            if (Mathf.Abs(horizontal) > 0.1f)
-            {
-                changeanim("run");
-                anim.SetFloat("speed", 1);
-            }
-            else
-            {
-                anim.SetFloat("speed", 0);
-            }
+            //if (Mathf.Abs(horizontal) > 0.1f)
+            //{
+            //    changeanim("run");
+            //    anim.SetFloat("speed", 1);
+            //}
+            //else
+            //{
+            //    anim.SetFloat("speed", 0);
+            //}
 
             if (Input.GetKeyDown(KeyCode.C) && isGrounded)
             {
